@@ -1,0 +1,41 @@
+
+<!-- importamos librerías -->
+<!-- Aframe es una libería creada por firefox que contiene three.js, basicamente muestra los objetos de three.js en AR-->
+<script src="vendor/aframe/build/aframe.min.js"></script>
+<!-- include ar.js for aframe -->
+<script src='../build/aframe-ar.js'></script>
+<script>ARjs.Context.baseURL = '../../three.js/'</script>
+<script src='../build/aframe-shadow-plane.js'></script>
+
+<body style='margin : 0px; overflow: hidden;'> //Definimos el body
+
+<a-scene embedded artoolkit='sourceType: webcam;'> //Creamos nuestra escena A-frame y le agregamos el componente AR-toolkit (Artoolkit es el que nos permite localizar el marker con la cámara)
+
+    <a-assets>
+        <a-asset-item id="tree1" src="tree1.dae"></a-asset-item>
+    </a-assets>
+
+    <a-collada-model src="#tree1" position="0 0 0" rotation="0 30 0"
+                     scale="0.5 0.5 0.5" shadow="cast:true"></a-collada-model>
+
+    <a-assets>
+        <a-mixin id="planet" geometry="primitive: sphere; radius: 0.5"></a-mixin>
+        <a-mixin id="orbit" attribute="rotation" to="0 360 0"
+                 repeat="indefinite" easing="linear" dur="3000"></a-mixin>
+        <a-mixin id="spin" attribute="rotation" to="0 360 0"
+                 repeat="indefinite" easing="linear" dur="96000"></a-mixin>
+        <img id="heart" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg">
+        <img id="sun" src="sun.jpg">
+    </a-assets>
+
+
+
+    <!--//Esto es A-frame. Contiene dentro three.js y lo muestra en AR, fijense que los atributos son muy parecidos.-->
+    <!--<a-sphere src="#heart" radius="0.5" position="0 0.5 0" segments-height="53">-->
+        <!--<a-animation mixin="orbit"></a-animation>-->
+    <!--</a-sphere>-->
+
+    //Acá marcamos el tipo de marker que queremos (puede ser hiro o kanji)
+    <a-marker-camera preset='hiro'></a-marker-camera>
+</a-scene>
+</body>
